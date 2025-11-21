@@ -10,6 +10,9 @@ class ApplicationController < ActionController::Base
   before_action :set_current_attributes
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  
+  # Layout para páginas de autenticación
+  layout :layout_by_resource
 
   protected
 
@@ -24,5 +27,13 @@ class ApplicationController < ActionController::Base
     Current.user = current_user
     Current.ip_address = request.remote_ip
     Current.user_agent = request.user_agent
+  end
+
+  def layout_by_resource
+    if devise_controller?
+      "auth"
+    else
+      "application"
+    end
   end
 end
