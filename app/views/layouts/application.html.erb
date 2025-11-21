@@ -135,16 +135,19 @@
             <%= button_to "Cerrar sesión", destroy_user_session_path, method: :delete,
                           class: "ml-2 px-3 py-1 rounded border border-gray-600 text-xs hover:bg-gray-800" %>
           <% else %>
-            <%= link_to "Ingreso staff", new_user_session_path, class: "px-2 py-1 rounded hover:text-dental-accent" %>
+            <%= link_to "Ingreso staff", new_user_session_path, class: "px-4 py-2 rounded bg-dental-accent text-white hover:bg-teal-600 font-medium" %>
           <% end %>
           <button id="theme-toggle" type="button" class="ml-4 px-3 py-1 text-xs rounded-full border border-gray-600 text-gray-200 hover:bg-gray-800">
             Modo claro
           </button>
         </div>
 
-        <!-- Versión móvil: solo botón reservar -->
-        <div class="md:hidden">
+        <!-- Versión móvil -->
+        <div class="md:hidden flex items-center space-x-2">
           <%= link_to "Reservar", public_booking_path, class: "px-3 py-1 rounded bg-dental-primary text-white text-xs" %>
+          <% unless user_signed_in? %>
+            <%= link_to "Login", new_user_session_path, class: "px-3 py-1 rounded bg-dental-accent text-white text-xs" %>
+          <% end %>
         </div>
       </nav>
     </header>
