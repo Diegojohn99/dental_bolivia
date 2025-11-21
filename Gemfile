@@ -48,7 +48,7 @@ gem "image_processing", "~> 1.2"
 # --- Dental Bolivia core gems ---
 gem "devise", "~> 4.9"
 gem "pundit"
-gem "sidekiq", "~> 7.1"
+gem "sidekiq", "~> 8.0"
 gem "figaro"
 gem "rqrcode", "~> 2.1"
 gem "wicked_pdf", "~> 2.1"
