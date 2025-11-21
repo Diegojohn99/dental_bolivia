@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Dental Bolivia" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Dental Bolivia">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- TailwindCSS via CDN para desarrollo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'dental-primary': '#2563eb', // azul principal
+              'dental-secondary': '#10b981', // verde suave
+              'dental-accent': '#6366f1', // violeta/azul acento
+              'dental-light': '#f3f4f6'
+            }
+          }
+        }
+      }
+    </script>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <style>
+      /* Ocultar cabecera por defecto de simple_calendar (usamos una personalizada) */
+      .simple-calendar .calendar-heading {
+        display: none;
+      }
+
+      /* Temas claro/oscuro básicos */
+      body.theme-dark {
+        background-color: #020617;
+        color: #e5e7eb;
+      }
+
+      body.theme-light {
+        background-color: #f3f4f6;
+        color: #111827;
+      }
+
+      body.theme-light header {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-color: #e5e7eb;
+      }
+
+      body.theme-light footer {
+        background-color: #f9fafb;
+        border-color: #e5e7eb;
+        color: #6b7280;
+      }
+
+      body.theme-light a {
+        color: inherit;
+      }
+    </style>
+
+    <%= javascript_importmap_tags %>
+    <script>
+      function initThemeToggle() {
+        var stored = localStorage.getItem("theme") || "dark";
+        var body = document.body;
+
+        // Quitar clases anteriores por si venimos de otra navegación
+        body.classList.remove("theme-dark", "theme-light");
+        body.classList.add("theme-" + stored);
+
+        var btn = document.getElementById("theme-toggle");
+        if (!btn) return;
+
+        function applyLabel(theme) {
+          btn.textContent = theme === "dark" ? "Modo claro" : "Modo oscuro";
+        }
+
+        applyLabel(stored);
+
+        // Evitar múltiples listeners
+        btn.onclick = function () {
+          var current = body.classList.contains("theme-dark") ? "dark" : "light";
+          var next = current === "dark" ? "light" : "dark";
+
+          body.classList.remove("theme-" + current);
+          body.classList.add("theme-" + next);
+          localStorage.setItem("theme", next);
+          applyLabel(next);
+        };
+      }
+
+      document.addEventListener("DOMContentLoaded", initThemeToggle);
+      document.addEventListener("turbo:load", initThemeToggle);
+    </script>
+  </head>
+
+  <body class="min-h-screen">
+    <!-- Barra de navegación principal -->
+    <header class="fixed top-0 inset-x-0 z-20 bg-gray-900/90 backdrop-blur border-b border-gray-800">
+      <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <div class="w-8 h-8 rounded-full bg-dental-primary flex items-center justify-center text-white font-bold text-sm">
+            DB
+          </div>
+          <div>
+            <span class="block text-sm font-semibold tracking-tight">Dental Bolivia</span>
+            <span class="block text-[11px] text-gray-400">Clínica odontológica</span>
+          </div>
+        </div>
+
+        <div class="hidden md:flex items-center space-x-4 text-sm">
+          <%= link_to "Inicio", root_path, class: "px-2 py-1 rounded hover:text-dental-accent" %>
+          <%= link_to "Quiénes Somos", about_path, class: "px-2 py-1 rounded hover:text-dental-accent" %>
+          <%= link_to "Servicios", services_path, class: "px-2 py-1 rounded hover:text-dental-accent" %>
+          <%= link_to "Contacto", contact_path, class: "px-2 py-1 rounded hover:text-dental-accent" %>
+          <%= link_to "Reservar cita", public_booking_path, class: "px-3 py-1 rounded bg-dental-primary text-white hover:bg-sky-600" %>
+          <% if user_signed_in? %>
+            <%= link_to "Agenda", appointments_path, class: "px-2 py-1 rounded hover:text-dental-accent" %>
+            <% if current_user.role_admin? %>
+              <%= link_to "Auditoría", audit_logs_path, class: "px-2 py-1 rounded hover:text-dental-accent" %>
+            <% end %>
+            <span class="text-[11px] text-gray-400 ml-2">Sesión: <%= current_user.name.presence || current_user.email %></span>
+            <%= button_to "Cerrar sesión", destroy_user_session_path, method: :delete,
+                          class: "ml-2 px-3 py-1 rounded border border-gray-600 text-xs hover:bg-gray-800" %>
+          <% else %>
+            <%= link_to "Ingreso staff", new_user_session_path, class: "px-2 py-1 rounded hover:text-dental-accent" %>
+          <% end %>
+          <button id="theme-toggle" type="button" class="ml-4 px-3 py-1 text-xs rounded-full border border-gray-600 text-gray-200 hover:bg-gray-800">
+            Modo claro
+          </button>
+        </div>
+
+        <!-- Versión móvil: solo botón reservar -->
+        <div class="md:hidden">
+          <%= link_to "Reservar", public_booking_path, class: "px-3 py-1 rounded bg-dental-primary text-white text-xs" %>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="pt-20 pb-10">
+      <div class="max-w-6xl mx-auto px-4">
+        <%= yield %>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto bg-gray-900 text-gray-300 py-8">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6">
+          <!-- Información de la clínica -->
+          <div>
+            <div class="flex items-center space-x-2 mb-4">
+              <div class="w-8 h-8 bg-dental-primary rounded-full flex items-center justify-center text-white font-bold text-sm">
+                DB
+              </div>
+              <span class="font-semibold text-white">Dental Bolivia</span>
+            </div>
+            <p class="text-sm text-gray-400 mb-3">
+              Tu sonrisa es nuestra prioridad. Servicios odontológicos de calidad en Cochabamba.
+            </p>
+            <div class="text-sm space-y-1">
+              <p><strong>📞</strong> +591 4 425-7890</p>
+              <p><strong>✉️</strong> info@dentalbolivia.com</p>
+              <p><strong>📍</strong> Av. Heroínas #1234, Cochabamba</p>
+            </div>
+          </div>
+
+          <!-- Enlaces rápidos -->
+          <div>
+            <h4 class="font-semibold text-white mb-4">Enlaces Rápidos</h4>
+            <ul class="space-y-2 text-sm">
+              <li><%= link_to "Inicio", root_path, class: "hover:text-dental-accent transition-colors" %></li>
+              <li><%= link_to "Quiénes Somos", about_path, class: "hover:text-dental-accent transition-colors" %></li>
+              <li><%= link_to "Servicios", services_path, class: "hover:text-dental-accent transition-colors" %></li>
+              <li><%= link_to "Contacto", contact_path, class: "hover:text-dental-accent transition-colors" %></li>
+              <li><%= link_to "Reservar Cita", public_booking_path, class: "hover:text-dental-accent transition-colors" %></li>
+            </ul>
+          </div>
+
+          <!-- Servicios -->
+          <div>
+            <h4 class="font-semibold text-white mb-4">Servicios</h4>
+            <ul class="space-y-2 text-sm">
+              <li><%= link_to "Estética Dental", services_path, class: "hover:text-dental-accent transition-colors" %></li>
+              <li><%= link_to "Ortodoncia", services_path, class: "hover:text-dental-accent transition-colors" %></li>
+              <li><%= link_to "Implantología", services_path, class: "hover:text-dental-accent transition-colors" %></li>
+              <li><%= link_to "Odontopediatría", services_path, class: "hover:text-dental-accent transition-colors" %></li>
+              <li><%= link_to "Emergencias", contact_path, class: "hover:text-dental-accent transition-colors" %></li>
+            </ul>
+          </div>
+
+          <!-- Horarios y redes -->
+          <div>
+            <h4 class="font-semibold text-white mb-4">Horarios</h4>
+            <div class="text-sm space-y-1 mb-4">
+              <p><strong>Lun - Vie:</strong> 09:00 - 20:00</p>
+              <p><strong>Sábados:</strong> 09:00 - 15:00</p>
+              <p><strong>Domingos:</strong> Cerrado</p>
+            </div>
+            
+            <h5 class="font-semibold text-white mb-2">Síguenos</h5>
+            <div class="flex space-x-3">
+              <a href="https://facebook.com/dentalbolivia" target="_blank" 
+                 class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                <span class="text-sm">📘</span>
+              </a>
+              <a href="https://instagram.com/dentalbolivia" target="_blank" 
+                 class="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-700 transition-colors">
+                <span class="text-sm">📷</span>
+              </a>
+              <a href="https://wa.me/59178923456" target="_blank" 
+                 class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors">
+                <span class="text-sm">💬</span>
+              </a>
+              <a href="https://youtube.com/dentalbolivia" target="_blank" 
+                 class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors">
+                <span class="text-sm">📺</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copyright y enlaces legales -->
+        <div class="border-t border-gray-700 pt-6">
+          <div class="flex flex-col md:flex-row justify-between items-center text-sm space-y-2 md:space-y-0">
+            <p>&copy; <%= Date.current.year %> Dental Bolivia. Todos los derechos reservados.</p>
+            <div class="flex space-x-4">
+              <%= link_to "Política de Privacidad", privacy_policy_path, class: "hover:text-dental-accent transition-colors" %>
+              <%= link_to "Solicitar datos", privacy_data_request_path, class: "hover:text-dental-accent transition-colors" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

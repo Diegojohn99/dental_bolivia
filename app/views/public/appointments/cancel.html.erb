@@ -1,0 +1,23 @@
+<div class="min-h-screen bg-dental-light flex items-center justify-center py-8 px-4">
+  <div class="bg-white shadow-lg rounded-2xl max-w-md w-full p-6 text-center space-y-4">
+    <% if @appointment %>
+      <div class="space-y-2">
+        <p class="text-xs uppercase tracking-[0.2em] text-dental-accent">Dental Bolivia</p>
+        <h1 class="text-2xl font-semibold text-dental-primary">Cita cancelada</h1>
+        <p class="text-gray-700 text-sm">Tu cita ha sido cancelada correctamente.</p>
+      </div>
+
+      <p class="text-[11px] text-gray-500">Puedes reservar una nueva fecha cuando te quede más cómodo.</p>
+
+      <div class="pt-2">
+        <%= link_to "Reservar otra cita", public_booking_path, class: "inline-flex items-center px-4 py-2 text-sm bg-dental-primary text-white rounded-lg hover:bg-sky-600" %>
+      </div>
+    <% else %>
+      <div class="space-y-2">
+        <h1 class="text-2xl font-semibold text-red-600">Enlace inválido</h1>
+        <p class="text-gray-700 text-sm">Este enlace de cancelación ya fue usado o no es válido.</p>
+        <%= link_to "Ir al formulario de reserva", public_booking_path, class: "inline-flex items-center px-4 py-2 mt-2 text-sm bg-dental-primary text-white rounded-lg hover:bg-sky-600" %>
+      </div>
+    <% end %>
+  </div>
+</div>

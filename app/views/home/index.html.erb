@@ -1,0 +1,155 @@
+<!-- Hero Section -->
+<div class="relative bg-gradient-to-br from-dental-primary to-sky-700 text-white py-20 px-4 overflow-hidden">
+  <div class="absolute inset-0 bg-black opacity-10"></div>
+  <div class="relative max-w-6xl mx-auto text-center space-y-8">
+    <div class="space-y-4">
+      <h1 class="text-5xl md:text-7xl font-bold">
+        Una sonrisa
+      </h1>
+      <p class="text-2xl md:text-3xl font-light">
+        que se adapte a tu estilo de vida
+      </p>
+      <p class="text-lg md:text-xl max-w-3xl mx-auto opacity-90">
+        En Dental Bolivia logramos que tengas la sonrisa perfecta. 
+        Ofrecemos una variedad de especialidades para cuidar tu sonrisa y de los que más quieres.
+      </p>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-4 justify-center items-center pt-6">
+      <%= link_to "Hacer una Cita", public_booking_path, 
+                  class: "px-10 py-4 bg-white text-dental-primary rounded-full text-lg font-bold hover:bg-gray-100 shadow-xl transform hover:scale-105 transition-all duration-300" %>
+      
+      <% if user_signed_in? %>
+        <%= link_to "Panel de Control", appointments_path, 
+                    class: "px-10 py-4 border-2 border-white text-white rounded-full text-lg font-semibold hover:bg-white hover:text-dental-primary transition-all duration-300" %>
+      <% else %>
+        <%= link_to "Acceso Staff", new_user_session_path, 
+                    class: "px-10 py-4 border-2 border-white text-white rounded-full text-lg font-semibold hover:bg-white hover:text-dental-primary transition-all duration-300" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- Servicios Section -->
+<div class="py-16 px-4 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-dental-primary mb-4">Nuestras Especialidades</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Contamos con profesionales especializados en diferentes áreas de la odontología
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="text-center group">
+        <div class="bg-gradient-to-br from-pink-100 to-pink-200 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+          <span class="text-3xl">✨</span>
+        </div>
+        <h3 class="text-xl font-semibold text-dental-primary mb-2">Estética Dental</h3>
+        <p class="text-gray-600 text-sm">Conseguimos la sonrisa perfecta con tratamientos estéticos avanzados</p>
+      </div>
+
+      <div class="text-center group">
+        <div class="bg-gradient-to-br from-blue-100 to-blue-200 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+          <span class="text-3xl">🦷</span>
+        </div>
+        <h3 class="text-xl font-semibold text-dental-primary mb-2">Ortodoncia</h3>
+        <p class="text-gray-600 text-sm">Enderezamos dientes y corregimos problemas de mordida</p>
+      </div>
+
+      <div class="text-center group">
+        <div class="bg-gradient-to-br from-green-100 to-green-200 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+          <span class="text-3xl">🔧</span>
+        </div>
+        <h3 class="text-xl font-semibold text-dental-primary mb-2">Implantología</h3>
+        <p class="text-gray-600 text-sm">Reemplazamos dientes perdidos con técnicas modernas</p>
+      </div>
+
+      <div class="text-center group">
+        <div class="bg-gradient-to-br from-yellow-100 to-yellow-200 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+          <span class="text-3xl">👶</span>
+        </div>
+        <h3 class="text-xl font-semibold text-dental-primary mb-2">Odontopediatría</h3>
+        <p class="text-gray-600 text-sm">Cuidado dental especializado para niños y adolescentes</p>
+      </div>
+    </div>
+
+    <div class="text-center mt-12">
+      <%= link_to "Ver Todos los Servicios", services_path, 
+                  class: "px-8 py-3 bg-dental-primary text-white rounded-full font-semibold hover:bg-sky-600 transition-colors duration-300" %>
+    </div>
+  </div>
+</div>
+
+<!-- Horarios y Contacto -->
+<div class="py-16 px-4 bg-gray-50">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Horarios -->
+      <div class="text-center lg:text-left">
+        <h2 class="text-3xl font-bold text-dental-primary mb-6">Horarios de Atención</h2>
+        <div class="space-y-4">
+          <div class="flex justify-between items-center bg-white p-4 rounded-lg shadow">
+            <span class="font-semibold text-gray-700">Lunes a Viernes</span>
+            <span class="text-dental-primary font-bold">09:00 - 13:00 | 14:00 - 20:00</span>
+          </div>
+          <div class="flex justify-between items-center bg-white p-4 rounded-lg shadow">
+            <span class="font-semibold text-gray-700">Sábados</span>
+            <span class="text-dental-primary font-bold">09:00 - 15:00</span>
+          </div>
+          <div class="flex justify-between items-center bg-white p-4 rounded-lg shadow">
+            <span class="font-semibold text-gray-700">Domingos</span>
+            <span class="text-gray-500">Cerrado</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contacto -->
+      <div class="text-center lg:text-left">
+        <h2 class="text-3xl font-bold text-dental-primary mb-6">Contactos</h2>
+        <div class="space-y-4">
+          <div class="flex items-center justify-center lg:justify-start space-x-3">
+            <span class="text-2xl">📞</span>
+            <div>
+              <p class="font-semibold text-gray-700">Cochabamba</p>
+              <p class="text-dental-primary font-bold">+591 4 425-7890</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-center lg:justify-start space-x-3">
+            <span class="text-2xl">✉️</span>
+            <div>
+              <p class="font-semibold text-gray-700">Email</p>
+              <p class="text-dental-primary font-bold">info@dentalbolivia.com</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-center lg:justify-start space-x-3">
+            <span class="text-2xl">📍</span>
+            <div>
+              <p class="font-semibold text-gray-700">Ubicación</p>
+              <p class="text-dental-primary font-bold">Av. Heroínas #1234, Cochabamba</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Newsletter -->
+<div class="py-16 px-4 bg-dental-primary text-white">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Mantente Informado</h2>
+    <p class="text-xl mb-8 opacity-90">
+      Suscríbete a nuestro newsletter y recibe las últimas actualizaciones sobre tratamientos y promociones
+    </p>
+    
+    <%= form_with url: newsletter_signup_path, method: :post, local: true, class: "flex flex-col md:flex-row gap-4 justify-center items-center max-w-md mx-auto" do |f| %>
+      <%= f.email_field :email, 
+                         placeholder: "tu@email.com", 
+                         required: true,
+                         class: "flex-1 px-4 py-3 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-white" %>
+      <%= f.submit "Suscribirse", 
+                   class: "px-8 py-3 bg-white text-dental-primary rounded-full font-bold hover:bg-gray-100 transition-colors duration-300 cursor-pointer" %>
+    <% end %>
+  </div>
+</div>

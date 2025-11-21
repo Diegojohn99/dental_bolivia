@@ -1,0 +1,119 @@
+<div class="py-4 space-y-4">
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+    <div>
+      <h1 class="text-2xl font-semibold text-dental-primary">Registro de auditoría</h1>
+      <p class="text-sm text-gray-300">Historial de acciones realizadas en el sistema.</p>
+    </div>
+  </div>
+
+  <!-- Filtros -->
+  <div class="bg-white/95 shadow rounded-2xl p-4">
+    <%= form_with url: audit_logs_path, method: :get, local: true, class: "grid grid-cols-1 md:grid-cols-4 gap-3" do |f| %>
+      <div>
+        <%= f.label :action_filter, "Acción", class: "block text-xs font-medium text-gray-700 mb-1" %>
+        <%= f.select :action_filter, 
+                     options_for_select([
+                       ["Todas", ""],
+                       ["Crear", "create"],
+                       ["Actualizar", "update"],
+                       ["Eliminar", "destroy"],
+                       ["Cambio de estado", "status_change"],
+                       ["Recordatorio enviado", "reminder_sent"]
+                     ], params[:action_filter]),
+                     {},
+                     class: "w-full border-gray-300 rounded-md text-xs" %>
+      </div>
+
+      <div>
+        <%= f.label :resource_type_filter, "Recurso", class: "block text-xs font-medium text-gray-700 mb-1" %>
+        <%= f.select :resource_type_filter,
+                     options_for_select([
+                       ["Todos", ""],
+                       ["Citas", "Appointment"],
+                       ["Facturas", "Invoice"],
+                       ["Pacientes", "Patient"]
+                     ], params[:resource_type_filter]),
+                     {},
+                     class: "w-full border-gray-300 rounded-md text-xs" %>
+      </div>
+
+      <div>
+        <%= f.label :date_from, "Desde", class: "block text-xs font-medium text-gray-700 mb-1" %>
+        <%= f.date_field :date_from, value: params[:date_from], class: "w-full border-gray-300 rounded-md text-xs" %>
+      </div>
+
+      <div class="flex items-end">
+        <%= f.submit "Filtrar", class: "w-full px-3 py-2 text-xs bg-dental-primary text-white rounded-md hover:bg-sky-600" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Lista de logs -->
+  <div class="bg-white/95 shadow rounded-2xl overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs">
+        <thead class="bg-gray-50 border-b">
+          <tr>
+            <th class="text-left py-2 px-3 font-semibold">Fecha/Hora</th>
+            <th class="text-left py-2 px-3 font-semibold">Usuario</th>
+            <th class="text-left py-2 px-3 font-semibold">Acción</th>
+            <th class="text-left py-2 px-3 font-semibold">Recurso</th>
+            <th class="text-left py-2 px-3 font-semibold">Detalles</th>
+            <th class="text-left py-2 px-3 font-semibold">IP</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          <% @audit_logs.each do |log| %>
+            <tr class="hover:bg-gray-50">
+              <td class="py-2 px-3 text-gray-600">
+                <%= l log.created_at, format: "%d/%m/%Y %H:%M" %>
+              </td>
+              <td class="py-2 px-3">
+                <% if log.user %>
+                  <span class="font-medium"><%= log.user.name %></span>
+                  <span class="text-gray-500">(<%= log.user.role %>)</span>
+                <% else %>
+                  <span class="text-gray-400">Sistema</span>
+                <% end %>
+              </td>
+              <td class="py-2 px-3">
+                <% case log.action %>
+                <% when "create" %>
+                  <span class="px-2 py-0.5 rounded-full text-[10px] bg-green-100 text-green-700">Crear</span>
+                <% when "update" %>
+                  <span class="px-2 py-0.5 rounded-full text-[10px] bg-blue-100 text-blue-700">Actualizar</span>
+                <% when "destroy" %>
+                  <span class="px-2 py-0.5 rounded-full text-[10px] bg-red-100 text-red-700">Eliminar</span>
+                <% when "status_change" %>
+                  <span class="px-2 py-0.5 rounded-full text-[10px] bg-yellow-100 text-yellow-700">Estado</span>
+                <% when "reminder_sent" %>
+                  <span class="px-2 py-0.5 rounded-full text-[10px] bg-purple-100 text-purple-700">Recordatorio</span>
+                <% else %>
+                  <span class="px-2 py-0.5 rounded-full text-[10px] bg-gray-100 text-gray-700"><%= log.action %></span>
+                <% end %>
+              </td>
+              <td class="py-2 px-3">
+                <span class="font-medium"><%= log.resource_type %></span>
+                <% if log.resource_id %>
+                  <span class="text-gray-500">#<%= log.resource_id %></span>
+                <% end %>
+              </td>
+              <td class="py-2 px-3 text-gray-600">
+                <%= truncate(log.details, length: 60) %>
+              </td>
+              <td class="py-2 px-3 text-gray-500 font-mono text-[10px]">
+                <%= log.ip_address %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <% if @audit_logs.empty? %>
+      <div class="py-8 text-center text-gray-500">
+        <p>No se encontraron registros de auditoría.</p>
+      </div>
+    <% end %>
+  </div>
+</div>

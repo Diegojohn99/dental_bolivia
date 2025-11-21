@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  email: MyString
+  phone: MyString
+  birth_date: 2025-11-20
+  address: MyString
+  allergies: MyText
+  medications: MyText
+  medical_history: MyText
+  notes: MyText
+  privacy_consent: false
+  data_retention_date: 2025-11-20
+  profile_access_token: MyString
+
+two:
+  name: MyString
+  email: MyString
+  phone: MyString
+  birth_date: 2025-11-20
+  address: MyString
+  allergies: MyText
+  medications: MyText
+  medical_history: MyText
+  notes: MyText
+  privacy_consent: false
+  data_retention_date: 2025-11-20
+  profile_access_token: MyString

@@ -1,0 +1,247 @@
+<!-- Hero Section -->
+<div class="relative bg-gradient-to-r from-dental-secondary to-emerald-600 text-white py-16 px-4">
+  <div class="max-w-6xl mx-auto text-center">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4">Nuestros Servicios</h1>
+    <p class="text-xl md:text-2xl opacity-90">
+      Servicios de calidad para toda la familia
+    </p>
+  </div>
+</div>
+
+<!-- Servicios Principales -->
+<div class="py-16 px-4 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-dental-primary mb-4">Especialidades Dentales</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Tenemos a los mejores profesionales para el cuidado de ti y de tu familia
+      </p>
+    </div>
+
+    <div class="space-y-12">
+      <% @services.each_with_index do |service, index| %>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center <%= 'lg:grid-flow-col-dense' if index.odd? %>">
+          <div class="<%= 'lg:col-start-2' if index.odd? %>">
+            <div class="bg-gradient-to-br from-gray-50 to-gray-100 p-8 rounded-2xl text-center">
+              <div class="text-6xl mb-4"><%= service[:icon] %></div>
+              <div class="bg-red-100 text-red-600 px-4 py-2 rounded-full text-sm font-semibold inline-block">
+                <%= service[:discount] %>
+              </div>
+            </div>
+          </div>
+          
+          <div class="<%= 'lg:col-start-1 lg:row-start-1' if index.odd? %>">
+            <h3 class="text-3xl font-bold text-dental-primary mb-4"><%= service[:name] %></h3>
+            <p class="text-gray-700 leading-relaxed mb-6 text-lg">
+              <%= service[:description] %>
+            </p>
+            
+            <div class="space-y-3 mb-6">
+              <% case service[:name] %>
+              <% when "Estética Dental" %>
+                <div class="flex items-center space-x-2">
+                  <span class="text-dental-secondary">✓</span>
+                  <span class="text-gray-700">Blanqueamiento dental profesional</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <span class="text-dental-secondary">✓</span>
+                  <span class="text-gray-700">Carillas de porcelana</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <span class="text-dental-secondary">✓</span>
+                  <span class="text-gray-700">Diseño de sonrisa digital</span>
+                </div>
+              <% when "Ortodoncia" %>
+                <div class="flex items-center space-x-2">
+                  <span class="text-dental-secondary">✓</span>
+                  <span class="text-gray-700">Brackets metálicos y estéticos</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <span class="text-dental-secondary">✓</span>
+                  <span class="text-gray-700">Ortodoncia invisible (Invisalign)</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <span class="text-dental-secondary">✓</span>
+                  <span class="text-gray-700">Ortodoncia interceptiva para niños</span>
+                </div>
+              <% when "Implantología" %>
+                <div class="flex items-center space-x-2">
+                  <span class="text-dental-secondary">✓</span>
+                  <span class="text-gray-700">Implantes unitarios</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <span class="text-dental-secondary">✓</span>
+                  <span class="text-gray-700">Rehabilitación completa</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <span class="text-dental-secondary">✓</span>
+                  <span class="text-gray-700">Cirugía guiada por computadora</span>
+                </div>
+              <% when "Odontopediatría" %>
+                <div class="flex items-center space-x-2">
+                  <span class="text-dental-secondary">✓</span>
+                  <span class="text-gray-700">Consultas preventivas</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <span class="text-dental-secondary">✓</span>
+                  <span class="text-gray-700">Selladores de fosas y fisuras</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <span class="text-dental-secondary">✓</span>
+                  <span class="text-gray-700">Fluorización gratuita</span>
+                </div>
+              <% end %>
+            </div>
+            
+            <%= link_to "Agendar Consulta", public_booking_path, 
+                        class: "px-8 py-3 bg-dental-primary text-white rounded-full font-semibold hover:bg-sky-600 transition-colors duration-300 inline-block" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- Servicios Adicionales -->
+<div class="py-16 px-4 bg-gray-50">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-dental-primary mb-4">Servicios Adicionales</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Complementamos tu tratamiento con servicios especializados
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-white p-6 rounded-2xl shadow-lg">
+        <div class="text-4xl mb-4">🦷</div>
+        <h4 class="text-xl font-semibold text-dental-primary mb-3">Endodoncia</h4>
+        <p class="text-gray-600 mb-4">Tratamientos de conducto con tecnología rotativa para mayor comodidad.</p>
+        <ul class="text-sm text-gray-600 space-y-1">
+          <li>• Tratamiento de conducto</li>
+          <li>• Retratamiento endodóntico</li>
+          <li>• Apicectomía</li>
+        </ul>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg">
+        <div class="text-4xl mb-4">🔧</div>
+        <h4 class="text-xl font-semibold text-dental-primary mb-3">Cirugía Oral</h4>
+        <p class="text-gray-600 mb-4">Procedimientos quirúrgicos menores con anestesia local.</p>
+        <ul class="text-sm text-gray-600 space-y-1">
+          <li>• Extracción de muelas del juicio</li>
+          <li>• Cirugía de quistes</li>
+          <li>• Frenectomía</li>
+        </ul>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg">
+        <div class="text-4xl mb-4">🧼</div>
+        <h4 class="text-xl font-semibold text-dental-primary mb-3">Periodoncia</h4>
+        <p class="text-gray-600 mb-4">Tratamiento de enfermedades de las encías y tejidos de soporte.</p>
+        <ul class="text-sm text-gray-600 space-y-1">
+          <li>• Limpieza profunda</li>
+          <li>• Tratamiento de gingivitis</li>
+          <li>• Cirugía periodontal</li>
+        </ul>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg">
+        <div class="text-4xl mb-4">🎭</div>
+        <h4 class="text-xl font-semibold text-dental-primary mb-3">Prótesis Dental</h4>
+        <p class="text-gray-600 mb-4">Rehabilitación oral con prótesis fijas y removibles.</p>
+        <ul class="text-sm text-gray-600 space-y-1">
+          <li>• Coronas y puentes</li>
+          <li>• Prótesis parciales</li>
+          <li>• Prótesis completas</li>
+        </ul>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg">
+        <div class="text-4xl mb-4">📸</div>
+        <h4 class="text-xl font-semibold text-dental-primary mb-3">Diagnóstico</h4>
+        <p class="text-gray-600 mb-4">Tecnología avanzada para diagnósticos precisos.</p>
+        <ul class="text-sm text-gray-600 space-y-1">
+          <li>• Radiografías digitales</li>
+          <li>• Tomografía 3D</li>
+          <li>• Fotografía intraoral</li>
+        </ul>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg">
+        <div class="text-4xl mb-4">💤</div>
+        <h4 class="text-xl font-semibold text-dental-primary mb-3">Sedación</h4>
+        <p class="text-gray-600 mb-4">Opciones de sedación para pacientes ansiosos.</p>
+        <ul class="text-sm text-gray-600 space-y-1">
+          <li>• Sedación consciente</li>
+          <li>• Óxido nitroso</li>
+          <li>• Anestesia local avanzada</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Promociones -->
+<div class="py-16 px-4 bg-dental-primary text-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Promociones Especiales</h2>
+      <p class="text-xl opacity-90">
+        Aprovecha nuestras ofertas limitadas
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-white text-gray-800 p-6 rounded-2xl shadow-lg">
+        <div class="text-center">
+          <div class="text-4xl mb-4">✨</div>
+          <h4 class="text-xl font-bold text-dental-primary mb-2">Blanqueamiento</h4>
+          <div class="text-3xl font-bold text-red-600 mb-2">50% OFF</div>
+          <p class="text-gray-600 mb-4">En tu primer blanqueamiento dental profesional</p>
+          <%= link_to "Reservar", public_booking_path, 
+                      class: "px-6 py-2 bg-dental-primary text-white rounded-full font-semibold hover:bg-sky-600 transition-colors duration-300" %>
+        </div>
+      </div>
+
+      <div class="bg-white text-gray-800 p-6 rounded-2xl shadow-lg">
+        <div class="text-center">
+          <div class="text-4xl mb-4">👶</div>
+          <h4 class="text-xl font-bold text-dental-primary mb-2">Niños</h4>
+          <div class="text-2xl font-bold text-green-600 mb-2">GRATIS</div>
+          <p class="text-gray-600 mb-4">Fluorización gratuita para menores de 12 años</p>
+          <%= link_to "Agendar", public_booking_path, 
+                      class: "px-6 py-2 bg-dental-secondary text-white rounded-full font-semibold hover:bg-emerald-600 transition-colors duration-300" %>
+        </div>
+      </div>
+
+      <div class="bg-white text-gray-800 p-6 rounded-2xl shadow-lg">
+        <div class="text-center">
+          <div class="text-4xl mb-4">👨‍👩‍👧‍👦</div>
+          <h4 class="text-xl font-bold text-dental-primary mb-2">Familia</h4>
+          <div class="text-2xl font-bold text-purple-600 mb-2">20% OFF</div>
+          <p class="text-gray-600 mb-4">Descuento familiar en limpiezas dentales</p>
+          <%= link_to "Consultar", public_booking_path, 
+                      class: "px-6 py-2 bg-dental-accent text-white rounded-full font-semibold hover:bg-purple-600 transition-colors duration-300" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA Section -->
+<div class="py-16 px-4 bg-white">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-dental-primary mb-4">¿Necesitas más información?</h2>
+    <p class="text-xl text-gray-600 mb-8">
+      Nuestro equipo está listo para asesorarte sobre el mejor tratamiento para ti
+    </p>
+    
+    <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+      <%= link_to "Agendar Consulta", public_booking_path, 
+                  class: "px-10 py-4 bg-dental-primary text-white rounded-full text-lg font-bold hover:bg-sky-600 shadow-xl transform hover:scale-105 transition-all duration-300" %>
+      <%= link_to "Llamar Ahora: +591 4 425-7890", "tel:+59144257890", 
+                  class: "px-10 py-4 border-2 border-dental-primary text-dental-primary rounded-full text-lg font-semibold hover:bg-dental-primary hover:text-white transition-all duration-300" %>
+    </div>
+  </div>
+</div>

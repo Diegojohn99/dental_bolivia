@@ -1,0 +1,97 @@
+<div class="min-h-screen flex items-center justify-center bg-transparent py-6 px-4">
+  <div class="bg-white shadow-lg rounded-lg max-w-3xl w-full p-6 text-sm text-gray-800">
+    <!-- Encabezado de clínica -->
+    <div class="flex items-start justify-between border-b pb-3 mb-4">
+      <div>
+        <h1 class="text-2xl font-semibold text-dental-primary tracking-tight">Dental Bolivia</h1>
+        <p class="text-xs text-gray-500">Clínica odontológica · Atención integral</p>
+        <p class="text-xs text-gray-500">La Paz, Bolivia</p>
+      </div>
+      <div class="text-right">
+        <p class="text-xs uppercase tracking-wide text-gray-500">Factura</p>
+        <p class="text-lg font-semibold">#<%= @invoice.id %></p>
+        <p class="text-xs text-gray-500">Emitida: <%= l Time.current, format: "%d/%m/%Y %H:%M" %></p>
+      </div>
+    </div>
+
+    <!-- Datos de paciente y cita -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div class="space-y-1">
+        <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500">Paciente</h2>
+        <p><span class="font-medium">Nombre:</span> <%= @invoice.patient.name %></p>
+        <p class="text-xs text-gray-500">ID Paciente: <%= @invoice.patient.id %></p>
+      </div>
+      <div class="space-y-1">
+        <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500">Cita</h2>
+        <p><span class="font-medium">Fecha y hora:</span> <%= l @invoice.appointment.scheduled_at, format: "%d/%m/%Y %H:%M" %></p>
+        <p><span class="font-medium">Dentista:</span> <%= @invoice.appointment.dentist.name %></p>
+      </div>
+    </div>
+
+    <!-- Detalle de servicios y monto -->
+    <div class="border rounded-md mb-4">
+      <table class="w-full text-xs">
+        <thead class="bg-gray-50 border-b">
+          <tr>
+            <th class="text-left py-2 px-3 font-semibold">Servicio</th>
+            <th class="text-left py-2 px-3 font-semibold">Método de pago</th>
+            <th class="text-right py-2 px-3 font-semibold">Monto (Bs)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-2 px-3 align-top"><%= @invoice.appointment.service_type %></td>
+            <td class="py-2 px-3 align-top capitalize"><%= @invoice.payment_method %></td>
+            <td class="py-2 px-3 text-right align-top font-semibold">
+              <%= number_to_currency(@invoice.amount, unit: "", separator: ",", delimiter: ".") %>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot class="bg-gray-50 border-t">
+          <tr>
+            <td class="py-2 px-3" colspan="2">
+              <span class="text-xs font-semibold text-gray-600">Estado:</span>
+              <% if @invoice.paid? %>
+                <span class="ml-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-700">Pagada</span>
+              <% else %>
+                <span class="ml-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-yellow-100 text-yellow-700">Pendiente</span>
+              <% end %>
+            </td>
+            <td class="py-2 px-3 text-right text-sm font-semibold">
+              Total: Bs <%= number_to_currency(@invoice.amount, unit: "", separator: ",", delimiter: ".") %>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- QR y nota legal -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <div class="md:col-span-2 text-xs text-gray-600 space-y-2">
+        <p class="font-semibold">Nota:</p>
+        <p>Este comprobante corresponde a servicios odontológicos prestados en la fecha indicada.</p>
+        <p>La información del paciente se trata de acuerdo con la normativa de protección de datos personales vigente en Bolivia. Consulte en recepción para más información sobre su consentimiento y derechos.</p>
+      </div>
+      <div class="md:col-span-1 text-center">
+        <p class="text-xs font-semibold mb-1">Código QR de la factura</p>
+        <div class="inline-block border p-2 bg-white">
+          <%= raw @qr_svg %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Acciones en la versión HTML -->
+    <div class="mt-4 pt-3 border-t flex justify-between items-center print:hidden">
+      <div>
+        <% unless @invoice.paid? %>
+          <%= button_to "Marcar como pagada", mark_paid_invoice_path(@invoice), method: :patch,
+                        class: "px-4 py-2 text-xs bg-emerald-600 text-white rounded-md hover:bg-emerald-700" %>
+        <% end %>
+      </div>
+      <div class="flex space-x-2">
+        <%= link_to "Volver a agenda", appointments_path, class: "px-4 py-2 text-xs border rounded-md" %>
+        <%= link_to "Descargar PDF", invoice_path(@invoice, format: :pdf), class: "px-4 py-2 text-xs bg-dental-primary text-white rounded-md hover:bg-sky-600" %>
+      </div>
+    </div>
+  </div>
+</div>

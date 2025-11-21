@@ -1,0 +1,108 @@
+<div class="max-w-4xl mx-auto py-6 px-4 space-y-6">
+  <div class="bg-white/95 shadow rounded-2xl p-6 md:p-8">
+    <h1 class="text-3xl font-bold text-dental-primary mb-6">Política de Privacidad</h1>
+    <p class="text-sm text-gray-600 mb-8">Última actualización: <%= Date.current.strftime("%d de %B de %Y") %></p>
+
+    <div class="prose prose-sm max-w-none space-y-6">
+      <section>
+        <h2 class="text-xl font-semibold text-gray-800 mb-3">1. Información que recopilamos</h2>
+        <p class="text-gray-700 leading-relaxed">
+          En Dental Bolivia recopilamos la siguiente información personal:
+        </p>
+        <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+          <li><strong>Datos de identificación:</strong> Nombre completo, cédula de identidad, fecha de nacimiento</li>
+          <li><strong>Datos de contacto:</strong> Dirección, teléfono, email</li>
+          <li><strong>Información médica:</strong> Historial dental, tratamientos, alergias, medicamentos</li>
+          <li><strong>Datos de facturación:</strong> Información de pagos y servicios contratados</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-gray-800 mb-3">2. Cómo utilizamos tu información</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Utilizamos tu información personal para:
+        </p>
+        <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+          <li>Brindar servicios odontológicos de calidad</li>
+          <li>Programar y confirmar citas médicas</li>
+          <li>Mantener tu historial médico actualizado</li>
+          <li>Procesar pagos y generar facturas</li>
+          <li>Enviar recordatorios de citas y seguimientos</li>
+          <li>Cumplir con obligaciones legales y regulatorias</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-gray-800 mb-3">3. Protección de datos</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Implementamos medidas técnicas y organizacionales para proteger tu información:
+        </p>
+        <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+          <li><strong>Cifrado:</strong> Toda la información sensible está cifrada en nuestra base de datos</li>
+          <li><strong>Acceso restringido:</strong> Solo personal autorizado puede acceder a tu información</li>
+          <li><strong>Auditoría:</strong> Registramos todos los accesos y modificaciones a tu información</li>
+          <li><strong>Retención limitada:</strong> Eliminamos automáticamente datos antiguos según la ley</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-gray-800 mb-3">4. Tus derechos</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Conforme a la legislación boliviana de protección de datos, tienes derecho a:
+        </p>
+        <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+          <li><strong>Acceso:</strong> Solicitar una copia de tu información personal</li>
+          <li><strong>Rectificación:</strong> Corregir información inexacta o incompleta</li>
+          <li><strong>Eliminación:</strong> Solicitar la eliminación de tu información (sujeto a obligaciones legales)</li>
+          <li><strong>Portabilidad:</strong> Obtener tu información en formato estructurado</li>
+          <li><strong>Oposición:</strong> Oponerte al procesamiento de tu información para ciertos fines</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-gray-800 mb-3">5. Retención de datos</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Conservamos tu información personal durante los siguientes períodos:
+        </p>
+        <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+          <li><strong>Historiales médicos:</strong> 10 años después del último tratamiento (según normativa sanitaria)</li>
+          <li><strong>Datos de facturación:</strong> 5 años (según normativa tributaria)</li>
+          <li><strong>Registros de auditoría:</strong> 3 años para fines de seguridad</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-gray-800 mb-3">6. Compartir información</h2>
+        <p class="text-gray-700 leading-relaxed">
+          No compartimos tu información personal con terceros, excepto:
+        </p>
+        <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+          <li>Cuando sea requerido por autoridades competentes</li>
+          <li>Para procesamiento de pagos (datos mínimos necesarios)</li>
+          <li>Con tu consentimiento explícito</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-gray-800 mb-3">7. Contacto</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Para ejercer tus derechos o hacer consultas sobre privacidad:
+        </p>
+        <div class="bg-gray-50 p-4 rounded-lg mt-3">
+          <p class="text-gray-700"><strong>Email:</strong> privacidad@dentalbolivia.com</p>
+          <p class="text-gray-700"><strong>Teléfono:</strong> +591 2 123-4567</p>
+          <p class="text-gray-700"><strong>Dirección:</strong> Av. Principal 123, La Paz, Bolivia</p>
+        </div>
+      </section>
+    </div>
+
+    <div class="mt-8 pt-6 border-t border-gray-200">
+      <div class="flex flex-col md:flex-row gap-3">
+        <%= link_to "Solicitar eliminación de datos", privacy_data_request_path, 
+                    class: "px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-center" %>
+        <%= link_to "Volver al inicio", root_path, 
+                    class: "px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 text-center" %>
+      </div>
+    </div>
+  </div>
+</div>

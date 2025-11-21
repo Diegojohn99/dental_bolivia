@@ -1,0 +1,12 @@
+# Figaro / environment configuration for Dental Bolivia
+# Do NOT commit real passwords or secrets to version control.
+
+# Default values for local development
+DB_USERNAME: "postgres"        # cambia si usas otro usuario
+DB_PASSWORD: "1234"  # pon aqui tu contraseña real de PostgreSQL
+DB_HOST: "localhost"
+DB_PORT: "5432"
+
+# Produccion (ejemplo, ajustar segun Render u otro hosting)
+DENTAL_BOLIVIA_DATABASE_PASSWORD: "CAMBIA_EN_PRODUCCION"
+ENCRYPTION_KEY: "cambia_esta_key_super_secreta"

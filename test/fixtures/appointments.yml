@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patient: one
+  dentist: one
+  scheduled_at: 2025-11-20 19:00:51
+  status: 1
+  service_type: MyString
+  notes: MyText
+  reminder_24h_sent: false
+  reminder_1h_sent: false
+  confirmation_token: MyString
+
+two:
+  patient: two
+  dentist: two
+  scheduled_at: 2025-11-20 19:00:51
+  status: 1
+  service_type: MyString
+  notes: MyText
+  reminder_24h_sent: false
+  reminder_1h_sent: false
+  confirmation_token: MyString

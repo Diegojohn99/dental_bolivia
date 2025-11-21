@@ -1,0 +1,259 @@
+<!-- Hero Section -->
+<div class="relative bg-gradient-to-r from-dental-accent to-purple-600 text-white py-16 px-4">
+  <div class="max-w-6xl mx-auto text-center">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4">Contactanos</h1>
+    <p class="text-xl md:text-2xl opacity-90">
+      Estamos aquí para ayudarte
+    </p>
+  </div>
+</div>
+
+<!-- Información de Contacto -->
+<div class="py-16 px-4 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Información -->
+      <div>
+        <h2 class="text-3xl font-bold text-dental-primary mb-8">Información de Contacto</h2>
+        
+        <div class="space-y-6">
+          <div class="flex items-start space-x-4">
+            <div class="bg-dental-primary text-white p-3 rounded-full">
+              <span class="text-xl">📍</span>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-1">Ubicación</h4>
+              <p class="text-gray-600">Av. Heroínas #1234, entre Calles Jordán y Nataniel Aguirre</p>
+              <p class="text-gray-600">Cochabamba, Bolivia</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="bg-dental-secondary text-white p-3 rounded-full">
+              <span class="text-xl">📞</span>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-1">Teléfonos</h4>
+              <p class="text-gray-600">Fijo: +591 4 425-7890</p>
+              <p class="text-gray-600">Celular: +591 7 892-3456</p>
+              <p class="text-gray-600">WhatsApp: +591 7 892-3456</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="bg-dental-accent text-white p-3 rounded-full">
+              <span class="text-xl">✉️</span>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-1">Email</h4>
+              <p class="text-gray-600">info@dentalbolivia.com</p>
+              <p class="text-gray-600">citas@dentalbolivia.com</p>
+              <p class="text-gray-600">emergencias@dentalbolivia.com</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="bg-emerald-600 text-white p-3 rounded-full">
+              <span class="text-xl">🕒</span>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-1">Horarios de Atención</h4>
+              <div class="space-y-1 text-gray-600">
+                <p><strong>Lunes a Viernes:</strong> 09:00 - 13:00 | 14:00 - 20:00</p>
+                <p><strong>Sábados:</strong> 09:00 - 15:00</p>
+                <p><strong>Domingos:</strong> Cerrado</p>
+                <p class="text-red-600 text-sm mt-2"><strong>Emergencias:</strong> 24/7 previa coordinación</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Redes Sociales -->
+        <div class="mt-8">
+          <h4 class="text-lg font-semibold text-gray-800 mb-4">Síguenos en Redes Sociales</h4>
+          <div class="flex space-x-4">
+            <a href="https://facebook.com/dentalbolivia" target="_blank" 
+               class="bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition-colors duration-300">
+              <span class="text-xl">📘</span>
+            </a>
+            <a href="https://instagram.com/dentalbolivia" target="_blank" 
+               class="bg-pink-600 text-white p-3 rounded-full hover:bg-pink-700 transition-colors duration-300">
+              <span class="text-xl">📷</span>
+            </a>
+            <a href="https://twitter.com/dentalbolivia" target="_blank" 
+               class="bg-sky-500 text-white p-3 rounded-full hover:bg-sky-600 transition-colors duration-300">
+              <span class="text-xl">🐦</span>
+            </a>
+            <a href="https://youtube.com/dentalbolivia" target="_blank" 
+               class="bg-red-600 text-white p-3 rounded-full hover:bg-red-700 transition-colors duration-300">
+              <span class="text-xl">📺</span>
+            </a>
+            <a href="https://wa.me/59178923456" target="_blank" 
+               class="bg-green-600 text-white p-3 rounded-full hover:bg-green-700 transition-colors duration-300">
+              <span class="text-xl">💬</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario de Contacto -->
+      <div class="bg-gray-50 p-8 rounded-2xl">
+        <h3 class="text-2xl font-bold text-dental-primary mb-6">Envíanos un Mensaje</h3>
+        
+        <%= form_with url: contact_path, method: :post, local: true, class: "space-y-4" do |f| %>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <%= f.label :name, "Nombre completo", class: "block text-sm font-medium text-gray-700 mb-1" %>
+              <%= f.text_field :name, required: true,
+                               class: "w-full border-gray-300 rounded-lg focus:ring-dental-primary focus:border-dental-primary" %>
+            </div>
+            <div>
+              <%= f.label :phone, "Teléfono", class: "block text-sm font-medium text-gray-700 mb-1" %>
+              <%= f.telephone_field :phone, required: true,
+                                    class: "w-full border-gray-300 rounded-lg focus:ring-dental-primary focus:border-dental-primary" %>
+            </div>
+          </div>
+
+          <div>
+            <%= f.label :email, "Email", class: "block text-sm font-medium text-gray-700 mb-1" %>
+            <%= f.email_field :email, required: true,
+                              class: "w-full border-gray-300 rounded-lg focus:ring-dental-primary focus:border-dental-primary" %>
+          </div>
+
+          <div>
+            <%= f.label :subject, "Asunto", class: "block text-sm font-medium text-gray-700 mb-1" %>
+            <%= f.select :subject, 
+                         options_for_select([
+                           ["Consulta general", "general"],
+                           ["Agendar cita", "appointment"],
+                           ["Información de precios", "pricing"],
+                           ["Emergencia dental", "emergency"],
+                           ["Reclamo o sugerencia", "complaint"]
+                         ]),
+                         { prompt: "Selecciona un asunto" },
+                         { class: "w-full border-gray-300 rounded-lg focus:ring-dental-primary focus:border-dental-primary" } %>
+          </div>
+
+          <div>
+            <%= f.label :message, "Mensaje", class: "block text-sm font-medium text-gray-700 mb-1" %>
+            <%= f.text_area :message, rows: 5, required: true,
+                            placeholder: "Describe tu consulta o mensaje...",
+                            class: "w-full border-gray-300 rounded-lg focus:ring-dental-primary focus:border-dental-primary" %>
+          </div>
+
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div class="flex items-start">
+              <%= f.check_box :privacy_consent, required: true,
+                              class: "mt-1 h-4 w-4 text-dental-primary border-gray-300 rounded focus:ring-dental-primary" %>
+              <%= f.label :privacy_consent, class: "ml-2 text-sm text-blue-800" do %>
+                Acepto el tratamiento de mis datos personales conforme a la 
+                <%= link_to "política de privacidad", privacy_policy_path, target: "_blank", class: "underline hover:text-blue-600" %>
+                para responder a mi consulta.
+              <% end %>
+            </div>
+          </div>
+
+          <%= f.submit "Enviar Mensaje", 
+                       class: "w-full px-6 py-3 bg-dental-primary text-white rounded-lg font-semibold hover:bg-sky-600 transition-colors duration-300" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mapa -->
+<div class="py-16 px-4 bg-gray-50">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-dental-primary mb-4">Nuestra Ubicación</h2>
+      <p class="text-lg text-gray-600">
+        Nos encontramos en el corazón de Cochabamba, fácil acceso en transporte público
+      </p>
+    </div>
+
+    <!-- Mapa embebido de Google Maps -->
+    <div class="bg-white p-4 rounded-2xl shadow-lg">
+      <div class="aspect-w-16 aspect-h-9">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.6!2d-66.1568!3d-17.3895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e373c8c8f8f8f8%3A0x8f8f8f8f8f8f8f8f!2sAv.%20Hero%C3%ADnas%2C%20Cochabamba%2C%20Bolivia!5e0!3m2!1ses!2sbo!4v1234567890"
+          width="100%" 
+          height="400" 
+          style="border:0; border-radius: 12px;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      
+      <div class="mt-4 text-center">
+        <p class="text-gray-600 mb-2">
+          <strong>Av. Heroínas #1234, entre Calles Jordán y Nataniel Aguirre</strong>
+        </p>
+        <p class="text-sm text-gray-500">
+          Referencias: Frente al Banco Unión, a 2 cuadras de la Plaza 14 de Septiembre
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Transporte Público -->
+<div class="py-16 px-4 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-dental-primary mb-4">Cómo Llegar</h2>
+      <p class="text-lg text-gray-600">
+        Múltiples opciones de transporte para tu comodidad
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="text-center p-6 bg-gray-50 rounded-2xl">
+        <div class="text-4xl mb-4">🚌</div>
+        <h4 class="text-lg font-semibold text-dental-primary mb-2">Transporte Público</h4>
+        <div class="text-sm text-gray-600 space-y-1">
+          <p><strong>Líneas:</strong> A, B, C, 1, 2, 15</p>
+          <p><strong>Parada:</strong> Heroínas - Jordán</p>
+          <p><strong>Tiempo:</strong> 5 min caminando</p>
+        </div>
+      </div>
+
+      <div class="text-center p-6 bg-gray-50 rounded-2xl">
+        <div class="text-4xl mb-4">🚗</div>
+        <h4 class="text-lg font-semibold text-dental-primary mb-2">Vehículo Propio</h4>
+        <div class="text-sm text-gray-600 space-y-1">
+          <p><strong>Estacionamiento:</strong> Disponible</p>
+          <p><strong>Costo:</strong> Gratuito para pacientes</p>
+          <p><strong>Seguridad:</strong> Vigilancia 24/7</p>
+        </div>
+      </div>
+
+      <div class="text-center p-6 bg-gray-50 rounded-2xl">
+        <div class="text-4xl mb-4">🚕</div>
+        <h4 class="text-lg font-semibold text-dental-primary mb-2">Taxi / Uber</h4>
+        <div class="text-sm text-gray-600 space-y-1">
+          <p><strong>Referencia:</strong> "Dental Bolivia"</p>
+          <p><strong>Zona:</strong> Centro - Heroínas</p>
+          <p><strong>Costo aprox:</strong> Bs. 15-25</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA Section -->
+<div class="py-16 px-4 bg-dental-primary text-white">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">¿Listo para visitarnos?</h2>
+    <p class="text-xl mb-8 opacity-90">
+      Agenda tu cita ahora y comienza tu camino hacia una sonrisa perfecta
+    </p>
+    
+    <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+      <%= link_to "Agendar Cita Online", public_booking_path, 
+                  class: "px-10 py-4 bg-white text-dental-primary rounded-full text-lg font-bold hover:bg-gray-100 shadow-xl transform hover:scale-105 transition-all duration-300" %>
+      <%= link_to "Llamar: +591 4 425-7890", "tel:+59144257890", 
+                  class: "px-10 py-4 border-2 border-white text-white rounded-full text-lg font-semibold hover:bg-white hover:text-dental-primary transition-all duration-300" %>
+    </div>
+  </div>
+</div>

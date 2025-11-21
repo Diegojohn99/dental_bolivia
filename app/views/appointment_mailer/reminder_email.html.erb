@@ -1,0 +1,14 @@
+<p>Hola <%= @patient.name %>,</p>
+
+<p>Este es un recordatorio de tu cita dental en <strong>Dental Bolivia</strong>.</p>
+
+<ul>
+  <li><strong>Fecha y hora:</strong> <%= l @appointment.scheduled_at, format: "%d/%m/%Y %H:%M" %></li>
+  <li><strong>Dentista:</strong> <%= @appointment.dentist.name %></li>
+  <li><strong>Servicio:</strong> <%= @appointment.service_type %></li>
+</ul>
+
+<p>Si no puedes asistir, por favor contáctanos para reprogramar tu cita.</p>
+
+<p>Gracias,<br>
+Equipo de Dental Bolivia</p>
