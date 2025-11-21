@@ -53,7 +53,7 @@ gem "figaro"
 gem "rqrcode", "~> 2.1"
 gem "wicked_pdf", "~> 2.1"
 gem "sendgrid-ruby", "~> 6.0"
-gem "twilio-ruby", "~> 5.0"
+gem "twilio-ruby", "~> 7.8"
 gem "simple_calendar"
 
 group :development, :test do
