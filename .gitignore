@@ -70,3 +70,10 @@ Thumbs.db
 
 # Ignore Sidekiq PID files
 /tmp/pids/sidekiq.pid
+
+# Ignore render.yaml with sensitive data
+render.yaml
+
+# Ignore configuration files with credentials
+RENDER_CONFIG.md
+DEPLOY_FINAL.md

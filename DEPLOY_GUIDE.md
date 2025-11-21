@@ -1,25 +1,16 @@
-# 🦷 Dental Bolivia - Guía de Despliegue en Render
+# 🚀 DENTAL BOLIVIA - GUÍA DE DESPLIEGUE EN RENDER
 
-## 📋 Preparación para Despliegue
+## 📋 PREPARACIÓN PARA DESPLIEGUE
 
 ### 1. Repositorio Git
-Primero, inicializa y sube tu código a GitHub:
-
-```bash
-git init
-git add .
-git commit -m "Initial commit - Dental Bolivia system"
-git branch -M main
-git remote add origin https://github.com/tu-usuario/dental-bolivia.git
-git push -u origin main
-```
+✅ **Completado** - Código ya está en GitHub: https://github.com/Diegojohn99/dental_bolivia.git
 
 ### 2. Crear cuenta en Render
 - Ve a [render.com](https://render.com)
 - Crea una cuenta gratuita
 - Conecta tu cuenta de GitHub
 
-## 🚀 Despliegue en Render
+## 🚀 DESPLIEGUE EN RENDER
 
 ### Paso 1: Crear Base de Datos PostgreSQL
 1. En el dashboard de Render, haz clic en "New +"
@@ -59,10 +50,10 @@ WEB_CONCURRENCY = 2
 
 #### Variables de Seguridad:
 ```
-# Claves de cifrado (usar las de tu .env actual)
-ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY = 7a418ca7a1470f15886b0ac4bf2ee7cf8a991059fa551ad62575e2a7a78059c6
-ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY = 3c84e103ba508148086286b0ae9ad846ad530690b23aa422b6cba1323d5b3ecb
-ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT = 195235e82c1e947ec410e52096126340bc48cb2b03fe676fbcbe07f8c13210ce
+# Claves de cifrado (usar las de tu .env local)
+ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY = [Tu clave del .env]
+ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY = [Tu clave del .env]
+ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT = [Tu clave del .env]
 
 # Claves principales (Render las genera automáticamente)
 SECRET_KEY_BASE = [Render genera automáticamente]
@@ -88,18 +79,12 @@ TWILIO_AUTH_TOKEN = tu-twilio-auth-token
 TWILIO_FROM_NUMBER = tu-numero-twilio
 ```
 
-#### Variables Opcionales:
-```
-# Redis (opcional, para mejor rendimiento)
-REDIS_URL = redis://tu-redis-url
-```
-
 ### Paso 4: Desplegar
 1. Haz clic en "Create Web Service"
 2. Render comenzará el proceso de build automáticamente
 3. El proceso tomará 5-10 minutos la primera vez
 
-## 📊 Post-Despliegue
+## 📊 POST-DESPLIEGUE
 
 ### Verificar el Despliegue
 1. Una vez completado, visita la URL proporcionada por Render
@@ -108,22 +93,19 @@ REDIS_URL = redis://tu-redis-url
    - **Admin**: admin@dentalbolivia.com / password123
    - **Dentista**: carlos.mendoza@dentalbolivia.com / password123
 
-### Configuraciones Adicionales
+### URLs de tu aplicación:
+- **Página Principal**: `https://dental-bolivia-web.onrender.com`
+- **Panel Admin**: `https://dental-bolivia-web.onrender.com/users/sign_in`
+- **Reserva Pública**: `https://dental-bolivia-web.onrender.com/public/booking/new`
 
-#### 1. Dominio Personalizado (Opcional)
-- En Render, ve a Settings → Custom Domains
-- Añade tu dominio personalizado
-- Configura los DNS según las instrucciones
+### Credenciales por defecto:
+- **Admin**: admin@dentalbolivia.com / password123
+- **Dentista 1**: carlos.mendoza@dentalbolivia.com / password123
+- **Dentista 2**: ana.rodriguez@dentalbolivia.com / password123
+- **Dentista 3**: luis.vargas@dentalbolivia.com / password123
+- **Recepcionista**: recepcion@dentalbolivia.com / password123
 
-#### 2. SSL/HTTPS
-- Render proporciona SSL automáticamente
-- No requiere configuración adicional
-
-#### 3. Monitoreo
-- Render proporciona logs automáticos
-- Ve a "Logs" para monitorear la aplicación
-
-## 🔧 Comandos Útiles
+## 🔧 COMANDOS ÚTILES
 
 ### Ejecutar comandos en producción:
 ```bash
@@ -138,13 +120,7 @@ render logs dental-bolivia-web
 render restart dental-bolivia-web
 ```
 
-### Ejecutar migraciones manualmente:
-```bash
-render shell dental-bolivia-web
-bundle exec rails db:migrate
-```
-
-## 🚨 Solución de Problemas
+## 🚨 SOLUCIÓN DE PROBLEMAS
 
 ### Error de Build
 - Revisa los logs de build en Render
@@ -155,20 +131,7 @@ bundle exec rails db:migrate
 - Verifica que `DATABASE_URL` esté configurada correctamente
 - Asegúrate de que la base de datos PostgreSQL esté activa
 
-### Error de Variables de Entorno
-- Verifica que todas las variables requeridas estén configuradas
-- Reinicia el servicio después de cambiar variables
-
-## 📱 URLs Importantes
-
-Una vez desplegado, tendrás acceso a:
-
-- **Página Principal**: `https://tu-app.onrender.com`
-- **Panel Admin**: `https://tu-app.onrender.com/users/sign_in`
-- **Reserva Pública**: `https://tu-app.onrender.com/public/booking/new`
-- **API Health Check**: `https://tu-app.onrender.com/up`
-
-## 🔐 Seguridad en Producción
+## 🔐 SEGURIDAD EN PRODUCCIÓN
 
 ### Cambiar Contraseñas por Defecto
 Después del despliegue, cambia inmediatamente las contraseñas por defecto:
@@ -179,17 +142,6 @@ Después del despliegue, cambia inmediatamente las contraseñas por defecto:
 ```ruby
 User.find_by(email: 'admin@dentalbolivia.com').update(password: 'nueva-contraseña-segura')
 ```
-
-### Configurar Email y SMS
-- Configura las variables de entorno para email y SMS
-- Prueba el envío de recordatorios
-
-## 📞 Soporte
-
-Si tienes problemas con el despliegue:
-1. Revisa los logs en Render
-2. Verifica la configuración de variables de entorno
-3. Consulta la documentación de Render: [render.com/docs](https://render.com/docs)
 
 ---
 
